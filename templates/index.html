@@ -7,14 +7,12 @@
   <p class="subtitle">Log in to your SocialPWA account to see the latest posts.</p>
 
   {% if msg %}
-  <!-- FIX 1: Reflected XSS — removed | safe -->
   <div class="msg-box" id="js-msg-box">{{ msg }}</div>
   {% else %}
   <div id="js-msg-box" style="display:none;"></div>
   {% endif %}
 
   <form action="/" method="POST">
-    <!-- FIX 2: CSRF — added token -->
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
     <div class="form-group">
       <label for="username">Username</label>
@@ -29,7 +27,6 @@
     </div>
     <div class="form-group">
       <label for="password">Password</label>
-      <!-- FIX 3: Password autocomplete — set to off -->
       <input
         type="password"
         id="password"
